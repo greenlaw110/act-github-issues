@@ -1,5 +1,3 @@
-# act-github-issues
+# GH624
 
-Reproduce github issues reported.
-
-This project use github issue number as branch name. The master branch is an empty hello world project
+See https://github.com/actframework/actframework/issues/624
