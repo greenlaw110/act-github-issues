@@ -8,16 +8,27 @@
 <body>
   <h1>Backend render list demo</h1>
 
+  @** 方法一 - 使用模板内自定义函数 linkItem *@
   @def linkItem(Link link) {
   <li>
     <a href="@link.getUrl()">@link.getDescription()</a>
   </li>
   }
-
   <ul class="link-list">
   @for (links) {
       @linkItem(_)
   }
   </ul>
+
+  @** 方法二 - 直接输出 *@
+  <ul class="link-list">
+    @for (links) {
+    <li>
+      <a href="@_.getUrl()">@_.getDescription()</a>
+    </li>
+    }
+  </ul>
+
+  需要了解更多 for 循环的使用, 参考 <a href="http://rythmengine.org/doc/directive.md#for">Rythm 模板文档</a>
 </body>
 </html>
