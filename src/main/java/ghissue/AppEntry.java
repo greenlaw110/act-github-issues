@@ -1,27 +1,23 @@
 package ghissue;
 
-import act.Act;
-import act.util.JsonView;
-import org.osgl.mvc.annotation.GetAction;
-import org.osgl.mvc.annotation.PostAction;
+import static act.controller.Controller.Util.render;
 
-import javax.inject.Named;
+import act.Act;
+import org.osgl.mvc.annotation.GetAction;
+
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class AppEntry {
 
     @GetAction
     public void home() {
-    }
-
-    @PostAction
-    @JsonView
-    public String[] post(@Named("idList") String[] ids) {
-        return ids;
+        List<Link> links = Link.generateTestData();
+        render(links);
     }
 
     public static void main(String[] args) throws Exception {
-        Act.start();
+        Act.start("Backend Render List Demo");
     }
 
 }

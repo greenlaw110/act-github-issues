@@ -1,13 +1,23 @@
 <!DOCTYPE html>
+@import ghissue.*
+@args Iterable<Link> links
 <html lang="en">
 <head>
-  <title>GH624</title>
+  <title>Backend render list demo</title>
 </head>
 <body>
-  <h1>GH624</h1>
-  <form action="/" method="post">
-    <input type="hidden" name="idList[]" value="117212">
-    <button>Submit</button>
-  </form>
+  <h1>Backend render list demo</h1>
+
+  @def linkItem(Link link) {
+  <li>
+    <a href="@link.getUrl()">@link.getDescription()</a>
+  </li>
+  }
+
+  <ul class="link-list">
+  @for (links) {
+      @linkItem(_)
+  }
+  </ul>
 </body>
 </html>
