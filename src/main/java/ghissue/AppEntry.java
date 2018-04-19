@@ -1,36 +1,36 @@
 package ghissue;
 
 import act.Act;
-import act.inject.DefaultValue;
-import act.util.Output;
+import com.tuyang.beanutils.BeanCopyUtils;
+import javassist.ClassPool;
 import org.osgl.mvc.annotation.GetAction;
+import org.osgl.util.E;
 
-/**
- * A simple hello world app entry
- *
- * Run this app, try to update some of the code, then
- * press F5 in the browser to watch the immediate change
- * in the browser!
- */
 @SuppressWarnings("unused")
 public class AppEntry {
 
-    /**
-     * The home (`/`) endpoint.
-     *
-     * This will accept a query parameter named `who` and
-     * render a template (resources/rythm/__package__/AppEntry/home.html),
-     * where `__package__` corresponding to the package name, e.g.
-     * if your package is `com.mycomp.myproj`, then `__package__`
-     * is `com/mycomp/myproj`.
-     *
-     * @param who
-     *      request query parameter to specify the hello target.
-     *      default value is `World`.
-     */
-    @GetAction
-    public void home(@DefaultValue("World") @Output String who) {
+    @GetAction("bean-util")
+    public FromBean beanUtilTest() {
+        ClassPool.getDefault();
+        FromBean from = new FromBean();
+        from.setId(11L);
+        FromBean to = new FromBean();
+        Thread currentThread = Thread.currentThread();
+        ClassLoader previousClassLoader = currentThread.getContextClassLoader();
+        currentThread.setContextClassLoader(Act.app().classLoader());
+        try {
+            BeanCopyUtils.copyBean(from, to);
+        } finally {
+            currentThread.setContextClassLoader(previousClassLoader);
+        }
+        return to;
     }
+
+    @GetAction("beetl")
+    public void beetlTest() {
+        E.tbd();
+    }
+
 
     public static void main(String[] args) throws Exception {
         Act.start();
