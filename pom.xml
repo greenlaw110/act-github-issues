@@ -21,4 +21,12 @@
     <app.entry>org.actframework.AppEntry</app.entry>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.actframework</groupId>
+      <artifactId>act</artifactId>
+      <version>1.8.8-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
 </project>
